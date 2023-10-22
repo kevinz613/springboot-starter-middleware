@@ -18,13 +18,14 @@ public class WhiteListAutoConfigure {
 
     /**
      * 白名单配置
-     * @ConditionalOnMissingBean 方法会在配置信息和Bean注册完成后，开始被实例化加载到Spring中
+     *
      * @param whiteListProperties 白名单属性
      * @return 字符串
+     * @ConditionalOnMissingBean 方法会在配置信息和Bean注册完成后，开始被实例化加载到Spring中
      */
     @Bean("whiteListConfig")
     @ConditionalOnMissingBean
-    public String whiteListConfig(WhiteListProperties whiteListProperties){
+    public String whiteListConfig(WhiteListProperties whiteListProperties) {
         return whiteListProperties.getUsers();
     }
 }

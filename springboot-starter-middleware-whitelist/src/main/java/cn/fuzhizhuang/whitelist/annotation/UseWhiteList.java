@@ -18,7 +18,7 @@ public @interface UseWhiteList {
     String key() default "";
 
     /**
-     *拦截用户请求后给出一个返回信息
+     * 拦截用户请求后给出一个返回信息
      */
     String returnJson() default "";
 }
