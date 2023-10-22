@@ -25,7 +25,7 @@ import java.lang.reflect.Method;
 @Component
 public class DoJointPoint {
 
-    private Logger logger = LoggerFactory.getLogger(DoJointPoint.class);
+    private final Logger logger = LoggerFactory.getLogger(DoJointPoint.class);
 
     @Resource
     private String whiteListConfig;
