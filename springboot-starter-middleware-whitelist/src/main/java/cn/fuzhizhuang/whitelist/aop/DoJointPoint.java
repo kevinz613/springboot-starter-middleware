@@ -54,10 +54,6 @@ public class DoJointPoint {
         //获取字段值
         String keyValue = getFieldValue(whiteList.key(), joinPoint.getArgs());
         logger.info("whitelist handler method-{} value-{}", method.getName(), keyValue);
-        if (null == keyValue || "".equals(keyValue)) {
-            //放行
-            return joinPoint.proceed();
-        }
         //解析配置信息
         String[] users = whiteListConfig.split(",");
         //白名单过滤
