@@ -1,0 +1,24 @@
+D:\workspace\IDEA\springboot-starter-middleware\springboot-starter-middleware-hystrix-test
+├── pom.xml
+└── src
+   ├── main
+   |  ├── java
+   |  |  └── cn
+   |  |     └── fuzhizhuang
+   |  |        └── middleware.hystrix
+   |  |           └── test
+   |  |              ├── HystrixApplication.java
+   |  |              └── interfaces
+   |  |                 ├── UserController.java
+   |  |                 └── UserInfo.java
+   |  └── resources
+   |     └── application.properties
+   └── test
+      └── java
+         └── cn
+            └── fuzhizhuang
+               └── test
+                  └── ApplicationTests.java
+
+directory: 14 file: 6
+

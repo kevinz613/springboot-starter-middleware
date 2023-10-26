@@ -8,6 +8,10 @@
   * [4.熔断服务包装](#4熔断服务包装)
   * [5.切面逻辑实现](#5切面逻辑实现)
   * [6.spring.factories](#6springfactories)
+* [测试](#测试)
+  * [1.工程结构](#1工程结构-1)
+  * [2.导入依赖](#2导入依赖)
+  * [3.接口方法使用中间件注解](#3接口方法使用中间件注解)
 <!-- TOC -->
 
 # 服务治理：超时熔断
@@ -225,5 +229,64 @@ public class UseHystrixPoint {
 ## 6.spring.factories
 ```properties
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=cn.fuzhizhuang.middleware.hystrix.config.HystrixAutoConfigure
+
+```
+
+# 测试
+## 1.工程结构
+<img src="https://raw.githubusercontent.com/zhuangfuzhi/notes-images/main/imgs/image-20231026234335529.png">
+
+## 2.导入依赖
+```
+<dependency>
+  <groupId>cn.fuzhizhuang</groupId>
+  <artifactId>springboot-starter-middleware-hystrix</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+</dependency>    
+```
+## 3.接口方法使用中间件注解
+```java
+@Controller
+@ResponseBody
+@RequestMapping("/api")
+public class UserController {
+
+    private final Logger logger = LoggerFactory.getLogger(UserController.class);
+
+    @UseHystrix(timeoutValue = 500, returnJson = "{\"code\":\"1111\",\"info\":\"调用方法超过500ms,熔断返回！\"}")
+    @RequestMapping(value = "/queryUserInfo", method = RequestMethod.GET)
+    public UserInfo queryUserInfo(@RequestParam String userId) throws InterruptedException {
+        logger.info("查询用户信息,userId:{}", userId);
+        long start = System.currentTimeMillis();
+        Thread.sleep(510);
+        long end = System.currentTimeMillis();
+        logger.info("耗时:{}ms", end - start);
+        UserInfo userInfo = new UserInfo();
+        userInfo.setCode("0000");
+        userInfo.setInfo("success");
+        userInfo.setName("白白:" + userId);
+        userInfo.setAge(24);
+        userInfo.setAddress("上海市普陀区华东师范大学中北校区");
+        return userInfo;
+    }
+
+    @UseHystrix(returnJson = "{\"code\":\"1111\",\"info\":\"调用方法超过400ms,熔断返回！\"}")
+    @RequestMapping(value = "/queryUserInfo1", method = RequestMethod.GET)
+    public UserInfo queryUserInfoDefault(@RequestParam String userId) throws InterruptedException {
+        logger.info("查询用户信息,userId:{}", userId);
+        long start = System.currentTimeMillis();
+        Thread.sleep(380);
+        long end = System.currentTimeMillis();
+        logger.info("耗时:{}ms", end - start);
+        UserInfo userInfo = new UserInfo();
+        userInfo.setCode("0000");
+        userInfo.setInfo("success");
+        userInfo.setName("白白:" + userId);
+        userInfo.setAge(25);
+        userInfo.setAddress("上海市普陀区华东师范大学中北校区理科大楼");
+        return userInfo;
+    }
+}
+
 
 ```
