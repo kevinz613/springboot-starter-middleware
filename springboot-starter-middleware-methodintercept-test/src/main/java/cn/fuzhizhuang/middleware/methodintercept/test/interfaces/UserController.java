@@ -21,21 +21,22 @@ public class UserController {
 
     private final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-    @UseMethodIntercept(method = "blacklist",returnJson = "{\"code\":\"1111\",\"info\":\"自定义拦截方法，不允许访问!\"}")
-    @RequestMapping(value = "/queryUserInfo",method = RequestMethod.GET)
+    @UseMethodIntercept(method = "blacklist", returnJson = "{\"code\":\"1111\",\"info\":\"自定义拦截方法，不允许访问!\"}")
+    @RequestMapping(value = "/queryUserInfo", method = RequestMethod.GET)
     public UserInfo queryUserInfo(@RequestParam String userId) throws InterruptedException {
-        logger.info("查询用户信息,userId:{}",userId);
+        logger.info("查询用户信息,userId:{}", userId);
         UserInfo userInfo = new UserInfo();
         userInfo.setCode("0000");
         userInfo.setInfo("success");
-        userInfo.setName("白白:"+userId);
+        userInfo.setName("白白:" + userId);
         userInfo.setAge(24);
         userInfo.setAddress("上海市普陀区华东师范大学中北校区");
         return userInfo;
     }
-    public boolean blacklist(@RequestParam String userId){
-        if ("bbb".equals(userId)|| "222".equals(userId)){
-            logger.info("拦截自定义黑名单用户-userId:{}",userId);
+
+    public boolean blacklist(@RequestParam String userId) {
+        if ("bbb".equals(userId) || "222".equals(userId)) {
+            logger.info("拦截自定义黑名单用户-userId:{}", userId);
             return false;
         }
         return true;

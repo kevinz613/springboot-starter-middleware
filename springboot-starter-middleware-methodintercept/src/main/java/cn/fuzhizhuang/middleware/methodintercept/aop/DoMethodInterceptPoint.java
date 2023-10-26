@@ -51,7 +51,7 @@ public class DoMethodInterceptPoint {
         return invoke ? joinPoint.proceed() : JSON.parseObject(annotation.returnJson(), method.getReturnType());
     }
 
-    private Class<? extends Object> getClass(JoinPoint joinPoint){
+    private Class<? extends Object> getClass(JoinPoint joinPoint) {
         return joinPoint.getTarget().getClass();
     }
 
