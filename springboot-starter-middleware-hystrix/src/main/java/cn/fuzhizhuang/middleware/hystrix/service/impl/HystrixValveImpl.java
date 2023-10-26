@@ -5,6 +5,7 @@ import cn.fuzhizhuang.middleware.hystrix.service.IValveService;
 import com.alibaba.fastjson.JSON;
 import com.netflix.hystrix.*;
 import org.aspectj.lang.ProceedingJoinPoint;
+
 import java.lang.reflect.Method;
 
 /**
@@ -80,7 +81,7 @@ public class HystrixValveImpl extends HystrixCommand<Object> implements IValveSe
         try {
             return joinPoint.proceed();
         } catch (Throwable e) {
-           return null;
+            return null;
         }
     }
 
@@ -90,7 +91,7 @@ public class HystrixValveImpl extends HystrixCommand<Object> implements IValveSe
      * @return {@link Object}
      */
     @Override
-    protected Object getFallback(){
-        return JSON.parseObject(useHystrix.returnJson(),method.getReturnType());
+    protected Object getFallback() {
+        return JSON.parseObject(useHystrix.returnJson(), method.getReturnType());
     }
 }

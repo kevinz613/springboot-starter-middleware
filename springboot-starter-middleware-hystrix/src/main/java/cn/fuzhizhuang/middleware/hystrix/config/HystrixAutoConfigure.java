@@ -16,8 +16,8 @@ import org.springframework.context.annotation.Configuration;
 public class HystrixAutoConfigure {
 
     @Bean("hystrixConfig")
-    public int hystrixConfig(HystrixProperties properties){
-       return properties.getTimeout();
+    public int hystrixConfig(HystrixProperties properties) {
+        return properties.getTimeout();
     }
 
 }

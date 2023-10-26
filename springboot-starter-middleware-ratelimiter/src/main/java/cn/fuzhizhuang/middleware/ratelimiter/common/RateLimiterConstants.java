@@ -11,5 +11,5 @@ import java.util.Map;
  * @description RateLimiter限流常量
  */
 public class RateLimiterConstants {
-    public static Map<String, RateLimiter> rateLimiterMap = Collections.synchronizedMap(new HashMap<String,RateLimiter>());
+    public static Map<String, RateLimiter> rateLimiterMap = Collections.synchronizedMap(new HashMap<String, RateLimiter>());
 }

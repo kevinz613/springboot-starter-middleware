@@ -29,26 +29,26 @@ public class UseHystrixPoint {
      * AOP 切点
      */
     @Pointcut("@annotation(cn.fuzhizhuang.middleware.hystrix.annotation.UseHystrix)")
-    public void aopPoint(){
+    public void aopPoint() {
 
     }
 
     @Around("aopPoint() && @annotation(useHystrix))")
     public Object doRouter(ProceedingJoinPoint joinPoint, UseHystrix useHystrix) throws Throwable {
         HystrixValveImpl hystrixValve = null;
-        if (useHystrix.timeoutValue()!=0) {
+        if (useHystrix.timeoutValue() != 0) {
             //方法自定义熔断时间
             hystrixValve = new HystrixValveImpl(useHystrix.timeoutValue());
-        }else {
+        } else {
             //配置文件通用熔断时间
             hystrixValve = new HystrixValveImpl(hystrixConfig);
         }
-        return hystrixValve.access(joinPoint,getMethod(joinPoint),useHystrix,joinPoint.getArgs());
+        return hystrixValve.access(joinPoint, getMethod(joinPoint), useHystrix, joinPoint.getArgs());
     }
 
     private Method getMethod(ProceedingJoinPoint joinPoint) throws NoSuchMethodException {
         Signature signature = joinPoint.getSignature();
         MethodSignature methodSignature = (MethodSignature) signature;
-        return joinPoint.getTarget().getClass().getMethod(signature.getName(),methodSignature.getParameterTypes());
+        return joinPoint.getTarget().getClass().getMethod(signature.getName(), methodSignature.getParameterTypes());
     }
 }

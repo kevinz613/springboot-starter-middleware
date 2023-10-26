@@ -13,6 +13,6 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan("cn.fuzhizhuang.middleware.hystrix.*")
 public class HystrixApplication {
     public static void main(String[] args) {
-        SpringApplication.run(HystrixApplication.class,args);
+        SpringApplication.run(HystrixApplication.class, args);
     }
 }

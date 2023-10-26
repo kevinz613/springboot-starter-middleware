@@ -21,14 +21,14 @@ public class UserController {
 
     private final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-    @UseRateLimiter(permitsPerSecond = 1,returnJson = "{\"code\":\"1111\",\"info\":\"调用方法超过最大次数,限流返回！\"}")
-    @RequestMapping(value = "/queryUserInfo",method = RequestMethod.GET)
+    @UseRateLimiter(permitsPerSecond = 1, returnJson = "{\"code\":\"1111\",\"info\":\"调用方法超过最大次数,限流返回！\"}")
+    @RequestMapping(value = "/queryUserInfo", method = RequestMethod.GET)
     public UserInfo queryUserInfo(@RequestParam String userId) throws InterruptedException {
-        logger.info("查询用户信息,userId:{}",userId);
+        logger.info("查询用户信息,userId:{}", userId);
         UserInfo userInfo = new UserInfo();
         userInfo.setCode("0000");
         userInfo.setInfo("success");
-        userInfo.setName("白白:"+userId);
+        userInfo.setName("白白:" + userId);
         userInfo.setAge(24);
         userInfo.setAddress("上海市普陀区华东师范大学中北校区");
         return userInfo;

@@ -21,19 +21,19 @@ import java.lang.reflect.Method;
 public class DoRateLimiterPoint {
 
     @Pointcut("@annotation(cn.fuzhizhuang.middleware.ratelimiter.annotation.UseRateLimiter)")
-    public void aopPoint(){
+    public void aopPoint() {
 
     }
 
     @Around("aopPoint() && @annotation(useRateLimiter)")
     public Object doRouter(ProceedingJoinPoint joinPoint, UseRateLimiter useRateLimiter) throws Throwable {
         RateLimiterServiceImpl rateLimiterService = new RateLimiterServiceImpl();
-        return rateLimiterService.access(joinPoint,getMethod(joinPoint),useRateLimiter,joinPoint.getArgs());
+        return rateLimiterService.access(joinPoint, getMethod(joinPoint), useRateLimiter, joinPoint.getArgs());
     }
 
     private Method getMethod(ProceedingJoinPoint joinPoint) throws NoSuchMethodException {
         Signature signature = joinPoint.getSignature();
         MethodSignature methodSignature = (MethodSignature) signature;
-        return joinPoint.getTarget().getClass().getMethod(methodSignature.getName(),methodSignature.getParameterTypes());
+        return joinPoint.getTarget().getClass().getMethod(methodSignature.getName(), methodSignature.getParameterTypes());
     }
 }
