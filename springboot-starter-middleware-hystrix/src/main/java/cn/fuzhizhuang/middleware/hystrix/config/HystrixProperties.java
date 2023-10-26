@@ -5,7 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * @author fuzhizhuang
- * @description TODO
+ * @description 获取熔断配置
  */
 
 @ConfigurationProperties(prefix = "middleware.hystrix")
