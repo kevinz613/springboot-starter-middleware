@@ -2,7 +2,6 @@ package cn.fuzhizhuang.middleware.ratelimiter.aop;
 
 import cn.fuzhizhuang.middleware.ratelimiter.annotation.UseRateLimiter;
 import cn.fuzhizhuang.middleware.ratelimiter.service.impl.RateLimiterServiceImpl;
-import jakarta.annotation.Resource;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;

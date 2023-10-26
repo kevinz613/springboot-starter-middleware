@@ -5,7 +5,6 @@ import com.alibaba.fastjson.JSON;
 import cn.fuzhizhuang.middleware.ratelimiter.common.RateLimiterConstants;
 import cn.fuzhizhuang.middleware.ratelimiter.service.IValveService;
 import com.google.common.util.concurrent.RateLimiter;
-import lombok.Setter;
 import org.aspectj.lang.ProceedingJoinPoint;
 
 import java.lang.reflect.Method;
