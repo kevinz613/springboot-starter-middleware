@@ -4,8 +4,10 @@ import cn.fuzhizhuang.middleware.hystrix.annotation.UseHystrix;
 import cn.fuzhizhuang.middleware.hystrix.service.IValveService;
 import com.alibaba.fastjson.JSON;
 import com.netflix.hystrix.*;
+import jakarta.annotation.Resource;
 import org.aspectj.lang.ProceedingJoinPoint;
 import java.lang.reflect.Method;
+import java.util.Map;
 
 /**
  * @author fuzhizhuang
@@ -28,7 +30,6 @@ public class HystrixValveImpl extends HystrixCommand<Object> implements IValveSe
      */
     private UseHystrix useHystrix;
 
-
     /**
      * <p>配置HystrixCommand的属性</p>
      * <p>groupKey：命令属于哪一个组，可以帮助我们更好的组织命令</p>
@@ -37,7 +38,7 @@ public class HystrixValveImpl extends HystrixCommand<Object> implements IValveSe
      * <p>CommandProperties：该命令的一些设置，包括断路由器的配置，隔离策略、降级设置，以及一些监控指标等</p>
      * <p>ThreadPoolProperties：关于线程池的配置，包括线程池大小，排队队列的大小等</p>
      */
-    public HystrixValveImpl() {
+    public HystrixValveImpl(int timeout) {
         super(
                 //设置命令属于哪一个组
                 Setter.withGroupKey(HystrixCommandGroupKey.Factory.asKey("GovernGroup"))
@@ -47,6 +48,7 @@ public class HystrixValveImpl extends HystrixCommand<Object> implements IValveSe
                         .andThreadPoolKey(HystrixThreadPoolKey.Factory.asKey("GovernThreadPool"))
                         //命令的配置
                         .andCommandPropertiesDefaults(HystrixCommandProperties.Setter()
+                                .withExecutionTimeoutInMilliseconds(timeout)
                                 .withExecutionIsolationStrategy(HystrixCommandProperties.ExecutionIsolationStrategy.THREAD)
                         )
                         //线程池的配置
