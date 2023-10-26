@@ -4,10 +4,8 @@ import cn.fuzhizhuang.middleware.hystrix.annotation.UseHystrix;
 import cn.fuzhizhuang.middleware.hystrix.service.IValveService;
 import com.alibaba.fastjson.JSON;
 import com.netflix.hystrix.*;
-import jakarta.annotation.Resource;
 import org.aspectj.lang.ProceedingJoinPoint;
 import java.lang.reflect.Method;
-import java.util.Map;
 
 /**
  * @author fuzhizhuang
