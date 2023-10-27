@@ -1,6 +1,5 @@
 package cn.fuzhizhuang.middleware.govern.service;
 
-import cn.fuzhizhuang.middleware.govern.annotation.UseHystrix;
 import org.aspectj.lang.ProceedingJoinPoint;
 
 import java.lang.reflect.Method;
@@ -16,7 +15,7 @@ public interface IValveService {
      *
      * @param joinPoint  加入点
      * @param method     方法
-     * @param useHystrix 自定义注解
+     * @param annotation 自定义注解
      * @param args       参数
      * @return {@link Object}
      * @throws Throwable 抛出异常
